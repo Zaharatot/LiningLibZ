@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiningLibZDemo", "LiningLibZDemo\LiningLibZDemo.csproj", "{5ACB003A-FD02-4EEF-B6B4-F13A575148C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiningLibZ", "LiningLibZ\LiningLibZ.csproj", "{50D1FB71-B04C-4B2D-86DE-403B24244D6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ACB003A-FD02-4EEF-B6B4-F13A575148C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACB003A-FD02-4EEF-B6B4-F13A575148C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACB003A-FD02-4EEF-B6B4-F13A575148C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACB003A-FD02-4EEF-B6B4-F13A575148C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D1FB71-B04C-4B2D-86DE-403B24244D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D1FB71-B04C-4B2D-86DE-403B24244D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D1FB71-B04C-4B2D-86DE-403B24244D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D1FB71-B04C-4B2D-86DE-403B24244D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B57A3DB-B240-4C40-8417-F4FB4960B013}
+	EndGlobalSection
+EndGlobal
