@@ -26,29 +26,35 @@ namespace LiningLibZDemo
 
             do
             {
-                try
-                {
+                //try
+                //{
                     //Выводим подсказку
                     Console.Write("Enter path to image: ");
                     //Считываем путь
-                    string path = Console.ReadLine();
+
+                    //TODO: TEST
+                    string path = @"Z:\4Chan_1\[E] Ecchi\cgg\1652185338472.jpg";
+
+                    //string path = Console.ReadLine();
+
+
                     //Формируем путь для сохранения
                     string savePath = Path.Combine(saveFolder, Path.GetFileName(path));
                     //Выполняем лайнинг и сохранение изображения
-                    liningLibZ.LineImage(path, savePath, 5, 0.7);
+                    liningLibZ.LineImage(path, savePath, 4, 0.9);
                     //Выводим сообщение о завершении работы
                     Console.WriteLine("Complete!");
                     //Выводим пустую строку
                     Console.WriteLine();
-                }
-                //В случае ошибки
-                catch (Exception e) {
-                    //Выводим её в консоль
-                    Console.ForegroundColor = ConsoleColor.Red;                    
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
+                //}
+                ////В случае ошибки
+                //catch (Exception e) {
+                //    //Выводим её в консоль
+                //    Console.ForegroundColor = ConsoleColor.Red;                    
+                //    Console.WriteLine(e.Message);
+                //    Console.WriteLine();
+                //    Console.ForegroundColor = ConsoleColor.White;
+                //}
             }
             while (true);
         }

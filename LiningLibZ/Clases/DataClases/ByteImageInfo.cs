@@ -65,63 +65,41 @@ namespace LiningLibZ.Clases.DataClases
         private int Clamp(int val, int min, int max) =>
             Math.Max(Math.Min(val, max), min);
 
-        /// <summary>
-        /// Получаем позицию в массиве пикселей по координатам
-        /// </summary>
-        /// <param name="x">Позиция по оси X</param>
-        /// <param name="y">Позиция по оси Y</param>
-        /// <returns>Позиция в одномерном массиве</returns>
-        private int GetPosition(int x, int y) =>
-            y * ImageSize.Width + x;
-
-
-
-        /// <summary>
-        /// Метод получения пикселя по координатам
-        /// </summary>
-        /// <param name="x">Позиция пикселя по оси X</param>
-        /// <param name="y">Позиция пикселя по оси Y</param>
-        /// <returns>Значение пикселя</returns>
-        public byte GetPixel(int x, int y) =>
-            //Конвертим позицию в пикселях в позицию одномерного
-            //массива, и возвращаем пиксель по этой позиции
-            Pixels[GetPosition(x, y)];
-
-        /// <summary>
-        /// Метод установки пикселя по координатам
-        /// </summary>
-        /// <param name="val">Значение для установки</param>
-        /// <param name="x">Позиция пикселя по оси X</param>
-        /// <param name="y">Позиция пикселя по оси Y</param>
-        public void SetPixel(int x, int y, byte val) =>
-            //Конвертим позицию в пикселях в позицию одномерного
-            //массива, и ставим пиксель по этой позиции
-            Pixels[GetPosition(x, y)] = val;
 
         /// <summary>
         /// Получаем область вокруг пикселя
         /// </summary>
-        /// <param name="x">Позиция пикселя по оси X</param>
-        /// <param name="y">Позиция пикселя по оси Y</param>
+        /// <param name="id">Идентификатор позиции текущего пикселя</param>
         /// <param name="size">Размер области</param>
         /// <returns>Байты области</returns>
-        public List<byte> GetPixelArea(int x, int y, int size)
+        public List<byte> GetPixelArea(int id, int size)
         {
             //Массив пикселей области
             List<byte> bytes = new List<byte>();
-            //Получаем значение сдвига в одну сторону
-            int halfSize = size / 2;
-            //Получаем обрезанное значение сдвигов по оси X
-            int minX = Clamp(x - halfSize, 0, ImageSize.Width);
-            int maxX = Clamp(x + halfSize, 0, ImageSize.Width);
-            //Получаем обрезанное значение сдвигов по оси Y
-            int minY = Clamp(y - halfSize, 0, ImageSize.Height);
-            int maxY = Clamp(y + halfSize, 0, ImageSize.Height);
-            //Проходимся по пикселям
-            for (int x1 = minX; x1 < maxX; x1++)
-                for (int y1 = minY; y1 < maxY; y1++)
-                    //Добавляем в список пиксель с указанной позиции
-                    bytes.Add(GetPixel(x1, y1));
+            //Переменные для обрезанных позиций по оси X
+            int min, max;
+            //Получаем крайние значения позиций по оси X
+            int minX = id - size;
+            int maxX = id + size;
+            //Получаем в локальные переменные значения свойств, чтобы их попусту не дёргать
+            int len = Pixels.Length - 1;
+            int width = ImageSize.Width;
+            //Получаем значение сдвига для перехода по оси Y
+            int minShift = width * size;
+            //Получаем обрезанные значения позиций по оси Y
+            int minY = Math.Max(-minShift, 0);
+            int maxY = Math.Min(minShift, len);
+            //Проходимся по оси Y
+            for (int y = minY; y <= maxY; y += width)
+            {
+                //Получаем обрезанные значения для позиций по оси X
+                min = Clamp(minX + y, 0, len);
+                max = Clamp(maxX + y, 0, len);
+                //Проходимся по оси X для текущего Y
+                for (int x = min; x <= max; x++)
+                    //Добавляем пиксели в выходной массив
+                    bytes.Add(Pixels[x]);
+            }
             //Возвращаем список найденных пикселей
             return bytes;
         }
@@ -129,11 +107,10 @@ namespace LiningLibZ.Clases.DataClases
         /// <summary>
         /// Получаем среднее значение цвета из области
         /// </summary>
-        /// <param name="x">Позиция пикселя по оси X</param>
-        /// <param name="y">Позиция пикселя по оси Y</param>
+        /// <param name="id">Идентификатор позиции текущего пикселя</param>
         /// <param name="size">Размер области</param>
         /// <returns>Среднее значение цвета из области</returns>
-        public byte GetAverageArea(int x, int y, int size) =>
-            (byte)GetPixelArea(x, y, size).Average(px => px);
+        public byte GetAverageArea(int id, int size) =>
+            (byte)GetPixelArea(id, size).Average(px => px);
     }
 }
